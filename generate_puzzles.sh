@@ -1,6 +1,6 @@
-#!/bin/bash
+DATE="$(date +%Y-%m-%d)"
 
-DATE="${date +'%Y-%m-%d'}"
+echo $DATE
 
 git clone https://github.com/BaconBreaker/sudoku_solver_generator_golang.git
 mkdir puzzles/$DATE/
