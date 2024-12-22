@@ -3,6 +3,7 @@
 name: Generate daily puzzles
 
 on:
+  workflow_dispatch:
   schedule:
   - cron: "0 0 * * *"
 
