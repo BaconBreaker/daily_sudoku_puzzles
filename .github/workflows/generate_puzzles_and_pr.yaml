@@ -1,5 +1,6 @@
 # This workflow generates new puzzles and their respecitve solutions
 # and saves them in repository
+# ${{ secrets.EMAIL }} ${{ secrets.USERNAME }} ${{ secrets.TOKEN }}
 name: Generate daily puzzles
 
 on:
@@ -24,9 +25,9 @@ jobs:
       - name: Commit files
         id: commit
         run: |
-          git config --local user.email ${{ secrets.EMAIL }}
-          git config --local user.name ${{ secrets.USERNAME }}
-          git config --local user.password ${{ secrets.TOKEN }}
+          git config --local user.email github-actions@github.com
+          git config --local user.name github-actions
+          git config --local user.password ${{ secrets.GITHUB_TOKEN }}
           git add --all
           if [-z "$(git status --porcelain)"]; then
             echo "::set-output name=push::false"
@@ -38,9 +39,3 @@ jobs:
 
       - name: Push changes
         run: git push
-
-#       - name: Push changes
-#         if: steps.commit.outputs.push == 'true'
-#         uses: ad-m/github-push-action@master
-#         with:
-#           github_token: ${{ secrets.TOKEN }}
